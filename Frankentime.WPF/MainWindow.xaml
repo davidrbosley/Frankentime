@@ -1,0 +1,15 @@
+﻿<Window x:Class="Frankstime.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Frankentime.WPF.ViewModel"
+        Title="FrankenTime" Height="170" Width="334" WindowStyle="None">
+    <Window.DataContext>
+        <local:TimerViewModel/>
+    </Window.DataContext>
+        <Grid Margin="4">
+        <Button Content="Start" HorizontalAlignment="Left" Margin="60,48,0,0" VerticalAlignment="Top" Width="75" Command="{Binding StartTimer}"/>
+        <Button Content="Stop" HorizontalAlignment="Left" Margin="201,48,0,0" VerticalAlignment="Top" Width="75" Command="{Binding StopTimer}"/>
+        <Label Content="{Binding TimeGathered}"  HorizontalAlignment="Left" Margin="60,97,0,0" VerticalAlignment="Top" Height="35" Width="216" FontSize="20" FontFamily="Wide Latin"/>
+        </Grid>
+    
+</Window>
