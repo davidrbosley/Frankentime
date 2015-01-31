@@ -122,6 +122,24 @@ namespace Frankentime.Domain.UnitTests.FrankenTimerTests
             VerifyTotalTime(TimeSpan.FromMinutes(10), _timer.TotalTime);
         }
 
+        [Test]
+        public void IsRunning_CorrectlyReportsIsRunning()
+        {
+            Assert.AreEqual(false, _timer.IsRunning, Environment.NewLine + "Incorrect IsRunning");
+            _timer.Start();
+            Assert.AreEqual(true, _timer.IsRunning, Environment.NewLine + "Incorrect IsRunning");
+            _timer.Stop();
+            Assert.AreEqual(false, _timer.IsRunning, Environment.NewLine + "Incorrect IsRunning");
+        }
+        [Test]
+        public void IsRunning_WhenRunningAndReset_IsStillTrue()
+        {
+            _timer.Start();
+            Assert.AreEqual(true, _timer.IsRunning, Environment.NewLine + "Incorrect IsRunning");
+            _timer.Reset();
+            Assert.AreEqual(true, _timer.IsRunning, Environment.NewLine + "Incorrect IsRunning");
+        }
+
         private void PutMinutesOnTimer(int minutes)
         {
             TFSysTimeFake.Instance.ReturnTimeOf(_startTime1, _startTime1.AddMinutes(minutes));
