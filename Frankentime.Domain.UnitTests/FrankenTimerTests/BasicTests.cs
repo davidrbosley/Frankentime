@@ -23,12 +23,6 @@ namespace Frankentime.Domain.UnitTests.FrankenTimerTests
             VerifyTotalTime(TimeSpan.Zero, _timer.TotalTime);
         }
 
-        private void VerifyTotalTime(TimeSpan expectedTime, TimeSpan actualTime)
-        {
-            Assert.AreEqual(expectedTime, actualTime, Environment.NewLine + "Incorrect Totaltime");
-        }
-
-
         [Test]
         public void Start_Stop_TotalTimeCorrect()
         {
@@ -36,16 +30,6 @@ namespace Frankentime.Domain.UnitTests.FrankenTimerTests
 
             VerifyTotalTime(TimeSpan.FromMinutes(42), _timer.TotalTime);
         }
-
-        private void StartAndStopTimerForMinutes(int numberOfMinutes)
-        {
-            TFSysTimeFake.Instance.ReturnTimeOf(_startTime1, _startTime1.AddMinutes(numberOfMinutes));
-            _timer.Start();
-            _timer.Stop();
-
-            _startTime1 = _startTime1.AddMinutes(numberOfMinutes + 1);
-        }
-
 
         [Test]
         public void StopCalledFirst_ReturnsZero()
@@ -91,7 +75,6 @@ namespace Frankentime.Domain.UnitTests.FrankenTimerTests
             _timer.Start();
 
             VerifyTotalTime(TimeSpan.FromMinutes(42), _timer.TotalTime);
-
         }
 
         [Test]
@@ -117,5 +100,50 @@ namespace Frankentime.Domain.UnitTests.FrankenTimerTests
         {
             Assert.AreEqual("00:00:00", _timer.ToString(), Environment.NewLine + "Incorrect ToString");
         }
+
+        [Test]
+        public void Reset_TimerStopped_ClearsTime()
+        {
+            PutMinutesOnTimer(42);
+            _timer.Reset();
+            VerifyTotalTime(TimeSpan.Zero, _timer.TotalTime);
+        }
+        [Test]
+        public void Reset_TimerRunning_RestartsFromZero()
+        {
+            StartAndStopTimerForMinutes(42);
+
+            _startTime1 = _startTime1.AddMinutes(44);
+            TFSysTimeFake.Instance.ReturnTimeOf(_startTime1, _startTime1.AddMinutes(30), _startTime1.AddMinutes(40));
+            _timer.Start();
+
+            _timer.Reset();
+
+            VerifyTotalTime(TimeSpan.FromMinutes(10), _timer.TotalTime);
+        }
+
+        private void PutMinutesOnTimer(int minutes)
+        {
+            TFSysTimeFake.Instance.ReturnTimeOf(_startTime1, _startTime1.AddMinutes(minutes));
+            _timer.Start();
+            _timer.Stop();
+        }
+
+        private void VerifyTotalTime(TimeSpan expectedTime, TimeSpan actualTime)
+        {
+            Assert.AreEqual(expectedTime, actualTime, Environment.NewLine + "Incorrect Totaltime");
+        }
+
+
+        private void StartAndStopTimerForMinutes(int numberOfMinutes)
+        {
+            TFSysTimeFake.Instance.ReturnTimeOf(_startTime1, _startTime1.AddMinutes(numberOfMinutes));
+            _timer.Start();
+            _timer.Stop();
+
+            _startTime1 = _startTime1.AddMinutes(numberOfMinutes + 1);
+        }
+
+
     }
 }

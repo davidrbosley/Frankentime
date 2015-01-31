@@ -31,6 +31,7 @@ namespace Frankentime.WPF.ViewModel
 
         public ICommand StartTimer { get { return new RelayCommand(StartTimerExecute, CanStartTimerExecute); } }
         public ICommand StopTimer { get { return new RelayCommand(StopTimerExecute, CanStopTimerExecute); } }
+        public ICommand ClearTimer { get { return new RelayCommand(ClearTimerExecute, CanClearTimerExecute); } }
 
         private bool CanStopTimerExecute()
         {
@@ -42,6 +43,17 @@ namespace Frankentime.WPF.ViewModel
             _frankenTimer.Stop();
             _timer.Stop();
         }
+
+        private bool CanClearTimerExecute()
+        {
+            return true;
+        }
+
+        private void ClearTimerExecute()
+        {
+            _frankenTimer.Reset();
+        }
+
 
         private bool CanStartTimerExecute()
         {

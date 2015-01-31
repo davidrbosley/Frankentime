@@ -5,15 +5,22 @@ using System.Linq;
 
 namespace Frankentime.Domain
 {
+    /// <summary>
+    /// A simple time collector
+    /// </summary>
     public class FrankenTimer
     {
         private DateTime _currentStart;
         private readonly List<TimeSpan> _trackedTimes = new List<TimeSpan>();
         private bool _isRunning;
 
-        public override string ToString()
+        public void Start()
         {
-            return TotalTime.ToString();
+            if (!_isRunning)
+            {
+                _isRunning = true;
+                _currentStart = SysTime.UtcNow;
+            }
         }
 
         public void Stop()
@@ -43,13 +50,17 @@ namespace Frankentime.Domain
             }
         }
 
-        public void Start()
+        public void Reset()
         {
-            if (!_isRunning)
-            {
-                _isRunning = true;
-                _currentStart = SysTime.UtcNow;
-            }
+            _trackedTimes.Clear();
+            _currentStart = SysTime.UtcNow;
         }
+
+        public override string ToString()
+        {
+            return TotalTime.ToString();
+        }
+
     }
+    
 }

@@ -66,12 +66,12 @@ namespace Frankentime.AcceptanceTests
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Triggering start mechanism that should begin gathering seconds")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
-        public virtual void TriggeringStartMechanismThatShouldBeginGatheringSeconds()
+        [NUnit.Framework.DescriptionAttribute("Triggering start mechanism should begin gathering seconds")]
+        [NUnit.Framework.CategoryAttribute("Timer")]
+        public virtual void TriggeringStartMechanismShouldBeginGatheringSeconds()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Triggering start mechanism that should begin gathering seconds", new string[] {
-                        "mytag"});
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Triggering start mechanism should begin gathering seconds", new string[] {
+                        "Timer"});
 #line 5
 this.ScenarioSetup(scenarioInfo);
 #line 6
@@ -80,6 +80,67 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.When("128 minutes have elapsed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 8
  testRunner.Then("the result should be 2 hours and 8 minutes on the screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Triggering stop mechanism should stop the gathering of seconds")]
+        [NUnit.Framework.CategoryAttribute("Timer")]
+        public virtual void TriggeringStopMechanismShouldStopTheGatheringOfSeconds()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Triggering stop mechanism should stop the gathering of seconds", new string[] {
+                        "Timer"});
+#line 11
+this.ScenarioSetup(scenarioInfo);
+#line 12
+ testRunner.Given("I have triggered the start mechanism", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 13
+ testRunner.And("69 minutes have elapsed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 14
+ testRunner.When("I trigger the stop mechanism", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 15
+ testRunner.Then("the result should be 1 hours and 9 minutes on the screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Triggering clear mechanism should flush any gathered seconds")]
+        [NUnit.Framework.CategoryAttribute("Timer")]
+        public virtual void TriggeringClearMechanismShouldFlushAnyGatheredSeconds()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Triggering clear mechanism should flush any gathered seconds", new string[] {
+                        "Timer"});
+#line 18
+this.ScenarioSetup(scenarioInfo);
+#line 19
+ testRunner.Given("I have 42 minutes gathered", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 20
+ testRunner.When("I trigger the clear mechanism", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 21
+ testRunner.Then("the result should be 0 hours and 0 minutes on the screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("The total number of gathered seconds should be visible in an Hour, Minute, Second" +
+            " format.")]
+        [NUnit.Framework.CategoryAttribute("Timer")]
+        public virtual void TheTotalNumberOfGatheredSecondsShouldBeVisibleInAnHourMinuteSecondFormat_()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The total number of gathered seconds should be visible in an Hour, Minute, Second" +
+                    " format.", new string[] {
+                        "Timer"});
+#line 24
+this.ScenarioSetup(scenarioInfo);
+#line 25
+ testRunner.Given("I have 129 minutes and 37 seconds gathered", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 26
+ testRunner.When("I look at the screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 27
+ testRunner.Then("the result should be 2 hours and 9 minutes and 37 seconds on the screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
