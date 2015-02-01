@@ -7,7 +7,7 @@ namespace Frankentime.Test
     public class TFSysTimeFake : ISysTime
     {
 
-        public static TFSysTimeFake Instance { get; set; }
+        public static TFSysTimeFake Instance { get; private set; }
 
         public static TFSysTimeFake InjectInSystem()
         {

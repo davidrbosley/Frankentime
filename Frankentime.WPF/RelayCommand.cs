@@ -12,12 +12,8 @@ namespace Frankentime.WPF
         #endregion
 
         #region Constructors
-        public RelayCommand(Action execute)
-            : this(execute, null)
-        {
-        }
 
-        public RelayCommand(Action execute, Func<Boolean> canExecute)
+        public RelayCommand(Action execute, Func<Boolean> canExecute = null)
         {
             if (execute == null)
                 throw new ArgumentNullException("execute");

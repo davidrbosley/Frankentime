@@ -12,7 +12,7 @@ namespace Frankentime.WPF.ViewModel
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            var handler = this.PropertyChanged;
+            var handler = PropertyChanged;
             if (handler != null)
             {
                 var e = new PropertyChangedEventArgs(propertyName);
@@ -23,7 +23,7 @@ namespace Frankentime.WPF.ViewModel
 
         public void Dispose()
         {
-            this.OnDispose();
+            OnDispose();
         }
 
         protected virtual void OnDispose()

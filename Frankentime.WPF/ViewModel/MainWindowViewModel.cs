@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 
 namespace Frankentime.WPF.ViewModel
 {
@@ -19,14 +14,7 @@ namespace Frankentime.WPF.ViewModel
 
         public ObservableCollection<ViewModelBase> ViewModels
         {
-            get
-            {
-                if (_viewModels == null)
-                {
-                    _viewModels= new ObservableCollection<ViewModelBase>();
-                }
-                return _viewModels;
-            }
+            get { return _viewModels ?? (_viewModels = new ObservableCollection<ViewModelBase>()); }
         }
 
     }
