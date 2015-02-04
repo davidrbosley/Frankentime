@@ -18,7 +18,7 @@ namespace Frankentime.Test
 
         private readonly List<DateTime> _dateTimeList = new List<DateTime>(); 
 
-        private void InjectIntoSystem()
+        public void InjectIntoSystem()
         {
             SysTime.Instance = this;
         }

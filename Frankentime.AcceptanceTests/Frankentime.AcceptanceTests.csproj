@@ -53,6 +53,7 @@
     </Compile>
     <Compile Include="GatherTimeSteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="FeaturesTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

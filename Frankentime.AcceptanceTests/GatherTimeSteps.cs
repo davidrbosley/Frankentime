@@ -7,7 +7,7 @@ using TechTalk.SpecFlow;
 namespace Frankentime.AcceptanceTests
 {
     [Binding]
-    public class GatherTimeSteps
+    public class GatherTimeSteps : FeaturesTestBase
     {
         readonly DateTime _startTime = new DateTime(2015, 1, 27, 3, 33, 42);
         private readonly TimerViewModel _timerViewModel;
@@ -15,7 +15,7 @@ namespace Frankentime.AcceptanceTests
         public GatherTimeSteps()
         {
             TFSysTimeFake.InjectInSystem();
-            _timerViewModel = new TimerViewModel();
+            _timerViewModel = new TimerViewModel(AnalyticsFake);
         }
 
         [Given(@"I have triggered the start mechanism")]

@@ -1,12 +1,18 @@
 ﻿using System;
 using System.ComponentModel;
+using Frankentime.Domain.Analytics;
 
 namespace Frankentime.WPF.ViewModel
 {
     public abstract class ViewModelBase : INotifyPropertyChanged, IDisposable
     {
-        protected ViewModelBase()
-        { }
+        protected readonly IAnalytics Analytics;
+
+        protected ViewModelBase(
+            IAnalytics analytics)
+        {
+            Analytics = analytics;
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

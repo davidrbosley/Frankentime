@@ -2,23 +2,27 @@
 using System.Timers;
 using System.Windows.Input;
 using Frankentime.Domain;
+using Frankentime.Domain.Analytics;
 
 namespace Frankentime.WPF.ViewModel
 {
     public class TimerViewModel : ViewModelBase
     {
-
-
         private readonly FrankenTimer _frankenTimer;
         private readonly Timer _timer;
 
-        public TimerViewModel()
+        // Dependency Injection via Constructor
+        public TimerViewModel(IAnalytics analytics)
+            : base(analytics)
         {
             _frankenTimer = new FrankenTimer();
             _timer = new Timer();
             _timer.Elapsed += SecondTick;
-        }
 
+            if (Analytics != null)
+                Analytics.ApplicationStart();
+        }
+        
 
         public string TimeGathered
         {
