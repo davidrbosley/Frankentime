@@ -39,6 +39,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -56,12 +57,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Behaviors\DropDownButtonBehavior.cs" />
     <Compile Include="IocConfiguration.cs" />
     <Compile Include="IocKernel.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="ViewModel\TimerViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Page Include="Resources\GlassButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -104,9 +110,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Frankenstime.Domain\Frankentime.Domain.csproj">
+    <ProjectReference Include="..\Frankentime.Domain\Frankentime.Domain.csproj">
       <Project>{dd6fc42a-a61f-4311-a56f-1556769d3542}</Project>
       <Name>Frankentime.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Franken\Franken\Franken.csproj">
+      <Project>{0D375B4B-6B1A-4A39-A7A2-50D27A933DFA}</Project>
+      <Name>Franken</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

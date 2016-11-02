@@ -1,12 +1,91 @@
-﻿<Window x:Class="Frankstime.WPF.MainWindow"
+﻿<Window x:Class="Frankentime.WPF.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="FrankenTime" Height="170" Width="334" WindowStyle="None" 
-        DataContext="{Binding TimerViewModel, Source={StaticResource ViewModelLocator}}">
-        <Grid Margin="4">
-        <Button Content="Start" HorizontalAlignment="Left" Margin="60,48,0,0" VerticalAlignment="Top" Width="75" Command="{Binding StartTimer}"/>
-        <Button Content="Stop" HorizontalAlignment="Left" Margin="201,48,0,0" VerticalAlignment="Top" Width="75" Command="{Binding StopTimer}"/>
-        <Label Content="{Binding TimeGathered}"  HorizontalAlignment="Left" Margin="60,97,0,0" VerticalAlignment="Top" Height="35" Width="216" FontSize="20" FontFamily="Wide Latin"/>
-        </Grid>
-    
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Frankentime.WPF"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        mc:Ignorable="d"
+        Title="FrankenTime" Height="117" Width="334" WindowStyle="None"         
+        DataContext="{Binding TimerViewModel, Source={StaticResource ViewModelLocator}}"
+        >
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources\GlassButton.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Margin="4,4,-17,4" HorizontalAlignment="Left" Width="339">
+        <Rectangle Height="20" HorizontalAlignment="Left" Name="Titlebar" Stroke="Black" VerticalAlignment="Top" Width="326" Fill="#FF859C69"  RadiusX="1" RadiusY="1" MouseDown="TitleBar_Mousedown" Margin="-4,-7,-4,0">
+
+        </Rectangle>
+
+        <Button Style="{StaticResource GlassButton}" Content="x" HorizontalAlignment="Left" Margin="305,-2,0,0" VerticalAlignment="Top" Width="9"  Height="15" Background="#FF1D5BBA" RenderTransformOrigin="0.46,0.334" Click="ExitAppClick" >
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.318"/>
+                    <TranslateTransform X="-0.014" Y="0.001"/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <ToggleButton Style="{StaticResource GlassToggleButton}"  Content="Work" HorizontalAlignment="Left" Margin="0,40,0,0" VerticalAlignment="Top" Width="48" Command="{Binding PushTimer}" Height="48" Background="#FF1D5BBA" />
+
+        <Button HorizontalAlignment="Left" Margin="304,25,-4,0" VerticalAlignment="Top" Width="18" Height="20" Background="#FF1D5BBA">
+            <i:Interaction.Behaviors>
+                <local:DropDownButtonBehavior/>
+            </i:Interaction.Behaviors>
+            <Button.Content>
+                <StackPanel Orientation="Horizontal" Width="14">
+                    <TextBlock Text="+-" Height="19" RenderTransformOrigin="0.534,0.086" Width="19"/>
+                    <Separator Margin="2,0">
+                        <Separator.LayoutTransform>
+                            <TransformGroup>
+                                <TransformGroup.Children>
+                                    <TransformCollection>
+                                        <RotateTransform Angle="90"/>
+                                    </TransformCollection>
+                                </TransformGroup.Children>
+                            </TransformGroup>
+                        </Separator.LayoutTransform>
+                    </Separator>
+                    <Path Margin="2" VerticalAlignment="Center" Width="6" Fill="#FF527DB5" Stretch="Uniform" HorizontalAlignment="Right" Data="F1 M 301.14,-189.041L 311.57,-189.041L 306.355,-182.942L 301.14,-189.041 Z "/>
+                </StackPanel>
+            </Button.Content>
+            <Button.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header ="Add...">
+                        <MenuItem Header="5" Command="{Binding Add5}"/>
+                        <MenuItem Header="15" Command="{Binding Add15}"/>
+                        <MenuItem Header="30" Command="{Binding Add30}"/>
+                    </MenuItem>
+                    <MenuItem Header ="Subtract...">
+                        <MenuItem Header="-5" Command="{Binding Subtract5}"/>
+                        <MenuItem Header="-15" Command="{Binding Subtract15}"/>
+                        <MenuItem Header="-30" Command="{Binding Subtract30}"/>
+                    </MenuItem>
+                    <Separator/>
+                    <MenuItem Header="Clear" Command="{Binding ClearTimer}"/>
+                </ContextMenu>
+            </Button.ContextMenu>
+        </Button>
+
+
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="39" Margin="57,46,0,0" Stroke="Black" VerticalAlignment="Top" Width="257"  RadiusX="25" RadiusY="100" >
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="0.574"/>
+                    <RotateTransform Angle="-0.277"/>
+                    <TranslateTransform X="0.003" Y="0.501"/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Label Content="{Binding TimeGathered}"  HorizontalAlignment="Left" Margin="63,50,0,0" VerticalAlignment="Top" Height="35" Width="244" FontSize="20" FontFamily="Wide Latin"/>
+    </Grid>
+
 </Window>

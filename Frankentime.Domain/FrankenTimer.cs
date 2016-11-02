@@ -32,10 +32,7 @@ namespace Frankentime.Domain
             }
         }
 
-        public bool IsRunning
-        {
-            get { return _isRunning; }
-        }
+        public bool IsRunning => _isRunning;
 
         public TimeSpan TotalTime
         {
@@ -48,6 +45,11 @@ namespace Frankentime.Domain
 
                 return total;
             }
+        }
+
+        public void AdjustTime(TimeSpan adjustment)
+        {
+            _trackedTimes.Add(adjustment);
         }
 
         public void Reset()

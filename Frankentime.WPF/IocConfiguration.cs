@@ -7,7 +7,7 @@ namespace Frankentime.WPF
     {
         public override void Load()
         {
-            Bind<IAnalytics>().To<PreemptiveAnalytics>().InSingletonScope();
+            Bind<IAnalytics>().To<AnalyticsMultiplexor>().InSingletonScope();
         }
     }
 }

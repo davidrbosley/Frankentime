@@ -108,6 +108,7 @@ namespace Frankentime.Domain.UnitTests.FrankenTimerTests
             _timer.Reset();
             VerifyTotalTime(TimeSpan.Zero, _timer.TotalTime);
         }
+
         [Test]
         public void Reset_TimerRunning_RestartsFromZero()
         {
@@ -131,6 +132,7 @@ namespace Frankentime.Domain.UnitTests.FrankenTimerTests
             _timer.Stop();
             Assert.AreEqual(false, _timer.IsRunning, Environment.NewLine + "Incorrect IsRunning");
         }
+
         [Test]
         public void IsRunning_WhenRunningAndReset_IsStillTrue()
         {
@@ -138,6 +140,18 @@ namespace Frankentime.Domain.UnitTests.FrankenTimerTests
             Assert.AreEqual(true, _timer.IsRunning, Environment.NewLine + "Incorrect IsRunning");
             _timer.Reset();
             Assert.AreEqual(true, _timer.IsRunning, Environment.NewLine + "Incorrect IsRunning");
+        }
+
+        [Test]
+        public void When_AdjustTimeByMinus30Minutes_Expect_TimeAdjustedbyMinus30Minutes()
+        {
+            TFSysTimeFake.Instance.ReturnTimeOf(_startTime1, _startTime1.AddMinutes(45.5));
+            _timer.Start();
+            _timer.Stop();
+
+            _timer.AdjustTime(TimeSpan.FromMinutes(-30));
+
+            VerifyTotalTime(TimeSpan.FromMinutes(15.5), _timer.TotalTime);
         }
 
         private void PutMinutesOnTimer(int minutes)

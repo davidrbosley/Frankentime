@@ -64,13 +64,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Frankenstime.Domain\Frankentime.Domain.csproj">
+    <ProjectReference Include="..\Frankentime.Domain\Frankentime.Domain.csproj">
       <Project>{dd6fc42a-a61f-4311-a56f-1556769d3542}</Project>
       <Name>Frankentime.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\Frankentime.WPF\Frankentime.WPF.csproj">
       <Project>{cc42a788-46d2-4d1b-b44c-6401343a4159}</Project>
       <Name>Frankentime.WPF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Franken\Franken\Franken.csproj">
+      <Project>{0D375B4B-6B1A-4A39-A7A2-50D27A933DFA}</Project>
+      <Name>Franken</Name>
     </ProjectReference>
     <ProjectReference Include="..\TestFramework\TestFramework.csproj">
       <Project>{40f56c56-2354-459d-9b04-af5ea873fc5d}</Project>

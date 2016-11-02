@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 
 namespace Frankentime.WPF
 {
@@ -12,5 +13,14 @@ namespace Frankentime.WPF
             //InitializeComponent();
         }
 
+        private void TitleBar_Mousedown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
+
+        private void ExitAppClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

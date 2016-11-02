@@ -44,11 +44,12 @@
   <ItemGroup>
     <Compile Include="TestBase.cs" />
     <Compile Include="TFAnalyticsFake.cs" />
+    <Compile Include="TFAnalyticsPageFake.cs" />
     <Compile Include="TFSysTimeFake.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Frankenstime.Domain\Frankentime.Domain.csproj">
+    <ProjectReference Include="..\Frankentime.Domain\Frankentime.Domain.csproj">
       <Project>{dd6fc42a-a61f-4311-a56f-1556769d3542}</Project>
       <Name>Frankentime.Domain</Name>
     </ProjectReference>

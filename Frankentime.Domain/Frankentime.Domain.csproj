@@ -30,6 +30,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Garlic">
+      <HintPath>..\packages\Garlic.2.1.0.0\lib\net35\Garlic.dll</HintPath>
+    </Reference>
+    <Reference Include="PreEmptive.Analytics.Common">
+      <HintPath>..\packages\PreemptiveAnalytics\PreEmptive.Analytics.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="PreEmptive.Analytics.Net">
+      <HintPath>..\packages\PreemptiveAnalytics\PreEmptive.Analytics.Net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,8 +48,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Analytics\AnalyticsMultiplexor.cs" />
+    <Compile Include="Analytics\AnalyticsPageMultiplexor.cs" />
+    <Compile Include="Analytics\GoogleAnalytics\GoogleAnalytics.cs" />
+    <Compile Include="Analytics\GoogleAnalytics\GoogleAnalyticsPage.cs" />
     <Compile Include="Analytics\IAnalytics.cs" />
-    <Compile Include="Analytics\PreemptiveAnalytics.cs" />
+    <Compile Include="Analytics\IPageAnalytics.cs" />
+    <Compile Include="Analytics\PreemptiveAnalytics\PreemptiveAnalytics.cs" />
+    <Compile Include="Analytics\PreemptiveAnalytics\PreemptiveAnalyticsPage.cs" />
     <Compile Include="FrankenTimer.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\LoggingCategory.cs" />
@@ -48,7 +63,15 @@
     <Compile Include="SysTime.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Franken\Franken\Franken.csproj">
+      <Project>{0D375B4B-6B1A-4A39-A7A2-50D27A933DFA}</Project>
+      <Name>Franken</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
