@@ -11,6 +11,9 @@ namespace Frankentime.WPF.ViewModel
         private readonly FrankenTimer _frankenTimer;
         private readonly Timer _timer;
 
+        private bool _showTime = true;
+        private readonly float _hourlyRate = 91.60f;
+
         // Dependency Injection via Constructor
         public TimerViewModel(IAnalytics analytics)
             : base(analytics)
@@ -23,7 +26,13 @@ namespace Frankentime.WPF.ViewModel
         }
         
 
-        public string TimeGathered => _frankenTimer.TotalTime.ToString(@"hh\:mm\:ss\.ff");
+        public string TimeGathered
+        {
+            get
+            {
+                return _showTime ? _frankenTimer.TotalTime.ToString(@"hh\:mm\:ss\.ff") : (_frankenTimer.TotalTime.TotalHours*_hourlyRate).ToString("C");
+            }
+        }
 
         public ICommand StartTimer => new RelayCommand(StartTimerExecute, CanStartTimerExecute);
         public ICommand StopTimer => new RelayCommand(StopTimerExecute, CanStopTimerExecute);
@@ -35,11 +44,19 @@ namespace Frankentime.WPF.ViewModel
         public ICommand Subtract5 => new RelayCommand(Subtract5Execute, CanSubtract5Execute);
         public ICommand Subtract15 => new RelayCommand(Subtract15Execute, CanSubtract15Execute);
 
-        public ICommand Add30 => new RelayCommand(Add30Execute, CanAdd);
-        public ICommand Add5 => new RelayCommand(Add5Execute, CanAdd);
-        public ICommand Add15 => new RelayCommand(Add15Execute, CanAdd);
+        public ICommand Add30 => new RelayCommand(Add30Execute, CanAlways);
+        public ICommand Add5 => new RelayCommand(Add5Execute, CanAlways);
+        public ICommand Add15 => new RelayCommand(Add15Execute, CanAlways);
 
-        private bool CanAdd()
+        public ICommand SwitchDisplay => new RelayCommand(SwitchDisplayExecute, CanAlways);
+
+        private void SwitchDisplayExecute()
+        {
+            _showTime = !_showTime;
+            OnPropertyChanged("TimeGathered");
+        }
+
+        private bool CanAlways()
         {
             return true;
         }
@@ -113,7 +130,7 @@ namespace Frankentime.WPF.ViewModel
 
         private void PushTimerExecute()
         {
-            Analytics.FeatureUsed("PushTimer");
+            Analytics?.FeatureUsed("PushTimer");
             if (_frankenTimer.IsRunning)
             {
                 _frankenTimer.Stop();
@@ -136,7 +153,7 @@ namespace Frankentime.WPF.ViewModel
             _frankenTimer.Stop();
             _timer.Stop();
 
-            Analytics.FeatureUsed("StopTimer");
+            Analytics?.FeatureUsed("StopTimer");
         }
 
         private bool CanClearTimerExecute()
@@ -148,7 +165,7 @@ namespace Frankentime.WPF.ViewModel
         {
             _frankenTimer.Reset();
             OnPropertyChanged("TimeGathered");
-            Analytics.FeatureUsed("ClearTimer");
+            Analytics?.FeatureUsed("ClearTimer");
         }
 
 
@@ -166,7 +183,7 @@ namespace Frankentime.WPF.ViewModel
                 RaiseEventAtNextSecond();
             }
 
-            Analytics.FeatureUsed("StartTimer");
+            Analytics?.FeatureUsed("StartTimer");
         }
 
         private void SecondTick(object sender, EventArgs e)

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Frankentime.WPF"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d"
-        Title="FrankenTime" Height="117" Width="334" WindowStyle="None"         
+        Title="FrankenTime" Height="117" Width="334" WindowStyle="None" 
         DataContext="{Binding TimerViewModel, Source={StaticResource ViewModelLocator}}"
         >
 
@@ -18,30 +18,28 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid Margin="4,4,-17,4" HorizontalAlignment="Left" Width="339">
-        <Rectangle Height="20" HorizontalAlignment="Left" Name="Titlebar" Stroke="Black" VerticalAlignment="Top" Width="326" Fill="#FF859C69"  RadiusX="1" RadiusY="1" MouseDown="TitleBar_Mousedown" Margin="-4,-7,-4,0">
-
+    <Grid Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Rectangle Height="20" HorizontalAlignment="Stretch" Name="Titlebar" Stroke="Black" VerticalAlignment="Top" Fill="#FF859C69"  RadiusX="1" RadiusY="1" MouseDown="TitleBar_Mousedown" Margin="0,0,0,0">
+            
         </Rectangle>
+        <TextBlock Text="FrankenTime" HorizontalAlignment="Center" VerticalAlignment="Top" Height="14" RenderTransformOrigin="0,0" Width="69"  Margin="0,0,0,0"/>
 
-        <Button Style="{StaticResource GlassButton}" Content="x" HorizontalAlignment="Left" Margin="305,-2,0,0" VerticalAlignment="Top" Width="9"  Height="15" Background="#FF1D5BBA" RenderTransformOrigin="0.46,0.334" Click="ExitAppClick" >
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-0.318"/>
-                    <TranslateTransform X="-0.014" Y="0.001"/>
-                </TransformGroup>
-            </Button.RenderTransform>
+        <Button Style="{StaticResource GlassButton}" HorizontalAlignment="Right" Margin="0,4,3,0" VerticalAlignment="Top" Width="9"  Height="9" Background="#FF1D5BBA" RenderTransformOrigin="0.46,0.334" Click="ExitAppClick" >
+            <TextBlock Text="x" Height="14" RenderTransformOrigin="0,0" Width="7"  Margin="2,-10,0,0"/>
         </Button>
-        <ToggleButton Style="{StaticResource GlassToggleButton}"  Content="Work" HorizontalAlignment="Left" Margin="0,40,0,0" VerticalAlignment="Top" Width="48" Command="{Binding PushTimer}" Height="48" Background="#FF1D5BBA" />
+        <ToggleButton Style="{StaticResource GlassToggleButton}"  Content="Work" HorizontalAlignment="Left" Margin="4,40,0,0" VerticalAlignment="Top" Width="48" Command="{Binding PushTimer}" Height="48" Background="#FF1D5BBA" >
+        </ToggleButton>
 
-        <Button HorizontalAlignment="Left" Margin="304,25,-4,0" VerticalAlignment="Top" Width="18" Height="20" Background="#FF1D5BBA">
+        <Button HorizontalAlignment="Right"  VerticalAlignment="Top" Width="16" Height="16" Margin="0,25,0,0">
             <i:Interaction.Behaviors>
                 <local:DropDownButtonBehavior/>
             </i:Interaction.Behaviors>
             <Button.Content>
                 <StackPanel Orientation="Horizontal" Width="14">
-                    <TextBlock Text="+-" Height="19" RenderTransformOrigin="0.534,0.086" Width="19"/>
+                    <!--<TextBlock Text="+-" Height="10" RenderTransformOrigin="0,0" Width="10"/>-->
+                    <!--<TextBlock Text="+-" Height="10" RenderTransformOrigin="0,0" Width="10"/>-->
+                    <!--<TextBlock Text="+-" Height="10" RenderTransformOrigin="0,0" Width="10"/>-->
+                    <Image Source="Resources/09_pencil-512.png" Width="13"/>
                     <Separator Margin="2,0">
                         <Separator.LayoutTransform>
                             <TransformGroup>
@@ -70,6 +68,7 @@
                     </MenuItem>
                     <Separator/>
                     <MenuItem Header="Clear" Command="{Binding ClearTimer}"/>
+                    <MenuItem Header="Switch $ / Time" Command="{Binding SwitchDisplay}"/>
                 </ContextMenu>
             </Button.ContextMenu>
         </Button>
