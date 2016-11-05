@@ -15,12 +15,9 @@ namespace Frankentime.WPF
 
         private void TitleBar_Mousedown(object sender, MouseButtonEventArgs e)
         {
-            this.DragMove();
+            DragMove();
         }
 
-        private void ExitAppClick(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
+
     }
 }

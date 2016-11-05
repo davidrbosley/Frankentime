@@ -22,9 +22,6 @@ namespace Frankentime.Domain
             }
         }
 
-        DateTime ISysTime.UtcNow
-        {
-            get { return DateTime.UtcNow; }
-        }
+        DateTime ISysTime.UtcNow => DateTime.UtcNow;
     }
 }

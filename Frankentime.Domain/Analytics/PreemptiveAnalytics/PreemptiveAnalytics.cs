@@ -27,17 +27,19 @@ namespace Frankentime.Domain.Analytics.PreemptiveAnalytics
 
         public void ApplicationStart()
         {
-            var config = new Configuration(CompanyId, ApplicationId);
+            var config = new Configuration(CompanyId, ApplicationId)
+            {
+                CompanyName = "FrankenTime",
+                ApplicationName = "FrankenTime WPF",
+                ApplicationType = "WPF",
+                ApplicationVersion = "1.0",
+                Endpoint = "message.runtimeintelligence.com/PreEmptive.Web.Services.Messaging/MessagingServiceV2.asmx",
+                UseSSL = false,
+                FullData = false,
+                OmitPersonalInfo = true,
+                SupportOfflineStorage = true
+            };
 
-            config.CompanyName = "FrankenTime";
-            config.ApplicationName = "FrankenTime WPF";
-            config.ApplicationType = "WPF";
-            config.ApplicationVersion = "1.0";
-            config.Endpoint = "message.runtimeintelligence.com/PreEmptive.Web.Services.Messaging/MessagingServiceV2.asmx";
-            config.UseSSL = false;
-            config.FullData = false;
-            config.OmitPersonalInfo = true;
-            config.SupportOfflineStorage = true;
 
             _paClient = new PAClient(config, new PreemptiveLogger());
 

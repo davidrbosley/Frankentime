@@ -16,7 +16,7 @@ namespace Frankentime.WPF
         public RelayCommand(Action execute, Func<Boolean> canExecute = null)
         {
             if (execute == null)
-                throw new ArgumentNullException("execute");
+                throw new ArgumentNullException(nameof(execute));
             _execute = execute;
             _canExecute = canExecute;
         }

@@ -3,6 +3,7 @@ using Frankentime.Test;
 using Frankentime.WPF.ViewModel;
 using NUnit.Framework;
 using TechTalk.SpecFlow;
+// ReSharper disable UnusedMember.Global
 
 namespace Frankentime.AcceptanceTests
 {
@@ -39,7 +40,8 @@ namespace Frankentime.AcceptanceTests
 
         private void VerifyTimeDisplay(int hours, int minutes, int seconds=0, int milliseconds=0)
         {
-            Assert.AreEqual(string.Format("{0}:{1}:{2}.{3}", hours.ToString("00"), minutes.ToString("00"), seconds.ToString("00"), milliseconds.ToString("00")), _timerViewModel.TimeGathered,
+            Assert.AreEqual(
+                $"{hours.ToString("00")}:{minutes.ToString("00")}:{seconds.ToString("00")}.{milliseconds.ToString("00")}", _timerViewModel.TimeGathered,
                 Environment.NewLine + "TimeGatheredIncorrect");
         }
 

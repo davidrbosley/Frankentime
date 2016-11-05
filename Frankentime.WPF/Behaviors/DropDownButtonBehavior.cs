@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Interactivity;
@@ -12,20 +7,20 @@ namespace Frankentime.WPF
 {
     public class DropDownButtonBehavior : Behavior<Button>
     {
-        private bool isContextMenuOpen;
+        private bool _isContextMenuOpen;
 
         protected override void OnAttached()
         {
             base.OnAttached();
-            AssociatedObject.AddHandler(Button.ClickEvent, new RoutedEventHandler(AssociatedObject_Click), true);
+            AssociatedObject.AddHandler(ButtonBase.ClickEvent, new RoutedEventHandler(AssociatedObject_Click), true);
         }
 
-        void AssociatedObject_Click(object sender, System.Windows.RoutedEventArgs e)
+        void AssociatedObject_Click(object sender, RoutedEventArgs e)
         {
             Button source = sender as Button;
-            if (source != null && source.ContextMenu != null)
+            if (source?.ContextMenu != null)
             {
-                if (!isContextMenuOpen)
+                if (!_isContextMenuOpen)
                 {
                     // Add handler to detect when the ContextMenu closes
                     source.ContextMenu.AddHandler(ContextMenu.ClosedEvent, new RoutedEventHandler(ContextMenu_Closed), true);
@@ -33,7 +28,7 @@ namespace Frankentime.WPF
                     source.ContextMenu.PlacementTarget = source;
                     source.ContextMenu.Placement = PlacementMode.Right;
                     source.ContextMenu.IsOpen = true;
-                    isContextMenuOpen = true;
+                    _isContextMenuOpen = true;
                 }
             }
         }
@@ -41,17 +36,14 @@ namespace Frankentime.WPF
         protected override void OnDetaching()
         {
             base.OnDetaching();
-            AssociatedObject.RemoveHandler(Button.ClickEvent, new RoutedEventHandler(AssociatedObject_Click));
+            AssociatedObject.RemoveHandler(ButtonBase.ClickEvent, new RoutedEventHandler(AssociatedObject_Click));
         }
 
         void ContextMenu_Closed(object sender, RoutedEventArgs e)
         {
-            isContextMenuOpen = false;
+            _isContextMenuOpen = false;
             var contextMenu = sender as ContextMenu;
-            if (contextMenu != null)
-            {
-                contextMenu.RemoveHandler(ContextMenu.ClosedEvent, new RoutedEventHandler(ContextMenu_Closed));
-            }
+            contextMenu?.RemoveHandler(ContextMenu.ClosedEvent, new RoutedEventHandler(ContextMenu_Closed));
         }
     }
 }

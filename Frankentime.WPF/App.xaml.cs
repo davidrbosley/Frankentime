@@ -9,7 +9,7 @@ namespace Frankentime.WPF
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            IocKernel.Initialize(new IocConfiguration());
+//            IocKernel.Initialize(new IocConfiguration());
 
             base.OnStartup(e);
         }

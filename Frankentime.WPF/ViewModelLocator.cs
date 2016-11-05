@@ -1,12 +1,9 @@
-﻿using Frankentime.WPF.ViewModel;
+﻿//using Frankentime.WPF.ViewModel;
 
-namespace Frankentime.WPF
-{
-    public class ViewModelLocator
-    {
-        public TimerViewModel TimerViewModel
-        {
-            get { return IocKernel.Get<TimerViewModel>(); } 
-        }
-    }
-}
+//namespace Frankentime.WPF
+//{
+//    public class ViewModelLocator
+//    {
+//        public TimerViewModel TimerViewModel => IocKernel.Get<TimerViewModel>();
+//    }
+//}
