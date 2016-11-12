@@ -1,0 +1,25 @@
+﻿<Window x:Class="Frankentime.WPF.CheckForUpdatesView"
+        x:Name="CheckForUpdates"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:intr="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
+        xmlns:local="clr-namespace:Frankentime.WPF"
+        mc:Ignorable="d"
+        Title="Check for Updates" Height="118.024" Width="296.88"
+        DataContext="{Binding CheckForUpdates, Source={StaticResource Locator}}"
+        >
+
+    <intr:Interaction.Triggers>
+        <intr:EventTrigger EventName="Loaded">
+            <intr:InvokeCommandAction Command="{Binding WindowLoadedCommand}"/>
+        </intr:EventTrigger>
+    </intr:Interaction.Triggers>
+
+    <Grid>
+        <Label Content="{Binding UpdateStatus}" HorizontalAlignment="Left" Height="26" Margin="26,32,0,0" VerticalAlignment="Top" Width="235"/>
+        <Button x:Name="button" Command ="{Binding CloseCommand, Mode=OneWay}"  CommandParameter="{Binding ElementName=CheckForUpdates}" Content="Close" HorizontalAlignment="Left" Margin="108,66,0,0" VerticalAlignment="Top" Width="75"/>
+
+    </Grid>
+</Window>

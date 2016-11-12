@@ -4,14 +4,14 @@ namespace Frankentime.Test
 {
     public class TestBase
     {
-        protected TFSysTimeFake SysTimeFake;
+        private TFSysTimeFake _sysTimeFake;
         protected TFAnalyticsFake AnalyticsFake;
 
         [SetUp]
         public virtual void SetUp()
         {
-            SysTimeFake = new TFSysTimeFake();
-            SysTimeFake.InjectIntoSystem();
+            _sysTimeFake = new TFSysTimeFake();
+            _sysTimeFake.InjectIntoSystem();
             AnalyticsFake = new TFAnalyticsFake();
         }
 

@@ -22,9 +22,7 @@ namespace Frankentime.WPF.ViewModel
 
         private readonly IAnalytics _analytics;
 
-        //private Task _updateTask;
 
-        // Dependency Injection via Constructor
         public TimerViewModel(IAnalytics analytics)
         {
             _frankenTimer = new FrankenTimer();
@@ -34,18 +32,9 @@ namespace Frankentime.WPF.ViewModel
             _analytics = analytics;
 
             _analytics?.ApplicationStart();
-
-            //CloseWindowCommand = new RelayCommand<Window>(this.CloseWindow);
-            //_updateTask = CheckForUpdates();
+            
         }
 
-        private async Task CheckForUpdates()
-        {
-            using (var mgr = new UpdateManager("C:\\Projects\\MyApp\\Releases"))
-            {
-                await mgr.UpdateApp();
-            }
-        }
 
         public string TimeGathered => _showTime ? _frankenTimer.TotalTime.ToString(@"hh\:mm\:ss\.ff") : (_frankenTimer.TotalTime.TotalHours*_hourlyRate).ToString("C");
 
@@ -53,8 +42,7 @@ namespace Frankentime.WPF.ViewModel
         public ICommand StopTimer => new RelayCommand(StopTimerExecute, CanStopTimerExecute);
         public ICommand ClearTimer => new RelayCommand(ClearTimerExecute, CanClearTimerExecute);
         public ICommand PushTimer => new RelayCommand(PushTimerExecute, CanPushTimerExecute);
-        public ICommand ExitApplication => new RelayCommand(ExitApplicationExecute, CanExitApplicationExecute);
-        public RelayCommand<Window> CloseWindowCommand => new RelayCommand<Window>(this.CloseWindow);
+        public RelayCommand<Window> CloseWindowCommand => new RelayCommand<Window>(CloseWindow);
 
         public ICommand Subtract30 => new RelayCommand(Subtract30Execute, CanSubtract30Execute);
         public ICommand Subtract5 => new RelayCommand(Subtract5Execute, CanSubtract5Execute);
@@ -64,16 +52,32 @@ namespace Frankentime.WPF.ViewModel
         public ICommand Add5 => new RelayCommand(Add5Execute, CanAlways);
         public ICommand Add15 => new RelayCommand(Add15Execute, CanAlways);
 
-        public ICommand SwitchDisplay => new RelayCommand(SwitchDisplayExecute, CanAlways);
+        public ICommand DisplayTime => new RelayCommand(SwitchDisplayTime, CanAlways);
+        public ICommand DisplayMoney => new RelayCommand(SwitchDisplayMoney, CanAlways);
+        public ICommand CheckUpdates => new RelayCommand(CheckForFrankenUpdates, CanAlways);
 
-        private void SwitchDisplayExecute()
+        private void SwitchDisplayMoney()
         {
-            _showTime = !_showTime;
+            _showTime = false;
             RaisePropertyChanged("TimeGathered");
         }
 
+        private void SwitchDisplayTime()
+        {
+            _showTime = true;
+            RaisePropertyChanged("TimeGathered");
+        }
+
+
+        private void CheckForFrankenUpdates()
+        {
+            //_navigationService.NavigateTo(ViewName.CheckForUpdates);
+        }
+
+
         private void CloseWindow(Window window)
         {
+
             window?.Close();
         }
 
@@ -132,16 +136,6 @@ namespace Frankentime.WPF.ViewModel
         {
             _frankenTimer.AdjustTime(TimeSpan.FromMinutes(-15));
             RaisePropertyChanged("TimeGathered");
-        }
-
-        private bool CanExitApplicationExecute()
-        {
-            return true;
-        }
-
-        private void ExitApplicationExecute()
-        {
-            
         }
 
         private bool CanPushTimerExecute()

@@ -9,7 +9,8 @@ namespace Frankentime.WPF.UnitTests.ViewModelTests
         [Test]
         public void Construction_SendsApplicationStartAnalytic()
         {
-            var timerViewModel = new TimerViewModel(AnalyticsFake);
+            // ReSharper disable once ObjectCreationAsStatement
+            new TimerViewModel(AnalyticsFake);
 
             AnalyticsFake.VerifyCallCount("ApplicationStart", 1);
         }

@@ -2,6 +2,7 @@
 
 namespace Frankentime.Domain.Analytics
 {
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class AnalyticsMultiplexor : IAnalytics
     {
         private readonly List<IAnalytics> _analytics;

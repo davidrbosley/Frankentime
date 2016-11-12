@@ -50,8 +50,7 @@ namespace Frankentime.Domain.Analytics.PreemptiveAnalytics
 
         public void ApplicationEnd()
         {
-            if (_paClient != null)
-                _paClient.ApplicationStop();
+            _paClient?.ApplicationStop();
         }
 
         public void FeatureUsed(string featureName)
