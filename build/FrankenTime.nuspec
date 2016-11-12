@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>FrankenTime</id>
+    <title>FrankenTime</title>
+    <version>1.0.0</version>
+    <authors>David Bosley</authors>
+    <owners>David Bosley</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>FrankenTime - a time gathering monstrosity!</description>
+    <releaseNotes></releaseNotes>
+  </metadata>
+</package>
