@@ -29,6 +29,7 @@ namespace Frankentime.WPF.UnitTests.ViewModelTests
         public void StopTimer_SendsAnalyticFeatureUsed()
         {
             var timerViewModel = new TimerViewModel(AnalyticsFake);
+            timerViewModel.StartTimer.Execute(null);
 
             timerViewModel.StopTimer.Execute(null);
 
