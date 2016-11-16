@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using Squirrel;
@@ -56,9 +53,8 @@ namespace Frankentime.WPF.ViewModel
 
         private void WindowLoaded()
         {
-            CheckForUpdates().Wait();
-
             _canClose = true;
+            CheckForUpdates().Wait();
         }
 
         private async Task CheckForUpdates()
@@ -67,6 +63,7 @@ namespace Frankentime.WPF.ViewModel
 
             try
             {
+                UpdateStatus = $"Loading Update Manager using location {UpdateLocation}...";
                 using (var mgr = new UpdateManager(UpdateLocation))
                 {
                     var updateInfo = await mgr.CheckForUpdate();
@@ -86,11 +83,12 @@ namespace Frankentime.WPF.ViewModel
                         UpdateStatus = "Creating uninstaller...";
                         mgr.CreateUninstallerRegistryEntry().Wait();
                     }
+                    UpdateStatus = "Done!";
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Could not update application! {ex.Message}", "Confirmation", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                UpdateStatus = $"Could not update application! {ex.Message}";
             }
 
             if (restart)
