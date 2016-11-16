@@ -18,8 +18,8 @@
     </intr:Interaction.Triggers>
 
     <Grid>
-        <Label Content="{Binding UpdateStatus}" HorizontalAlignment="Left" Height="26" Margin="26,32,0,0" VerticalAlignment="Top" Width="235"/>
-        <Button x:Name="button" Command ="{Binding CloseCommand, Mode=OneWay}"  CommandParameter="{Binding ElementName=CheckForUpdates}" Content="Close" HorizontalAlignment="Left" Margin="108,66,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label Content="{Binding UpdateStatus}" HorizontalAlignment="Left" Height="26" Margin="20,14,0,0"  VerticalAlignment="Top" Width="235"/>
+        <Button x:Name="button" Command ="{Binding CloseCommand, Mode=OneWay}"  CommandParameter="{Binding ElementName=CheckForUpdates}" Content="Close" HorizontalAlignment="Left" Margin="107,53,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </Window>

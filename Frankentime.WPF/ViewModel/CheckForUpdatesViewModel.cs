@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -10,15 +9,14 @@ namespace Frankentime.WPF.ViewModel
 {
     public class CheckForUpdatesViewModel : ViewModelBase
     {
-#if DEBUG
-        private string UpdateLocation = @"I:\Projects\FrankenTime\Releases";
-#else
+//#if DEBUG
+//        private string UpdateLocation = @"I:\Projects\FrankenTime\Releases";
+//#else
         private string UpdateLocation = "http://52.183.38.142/downloads";
-#endif
-
+//#endif
 
         private string _updateStatus;
-        private bool _canClose = false;
+        private bool _canClose;
 
 
         public RelayCommand<Window> CloseCommand=> new RelayCommand<Window>(CloseExecute, CanClose);
@@ -53,17 +51,20 @@ namespace Frankentime.WPF.ViewModel
 
         private void WindowLoaded()
         {
+
+#pragma warning disable 4014
+            CheckForUpdates();
+#pragma warning restore 4014
             _canClose = true;
-            CheckForUpdates().Wait();
         }
 
-        private async Task CheckForUpdates()
+        private async void CheckForUpdates()
         {
             var restart = false;
 
             try
             {
-                UpdateStatus = $"Loading Update Manager using location {UpdateLocation}...";
+                UpdateStatus = $"Contacting {UpdateLocation}...";
                 using (var mgr = new UpdateManager(UpdateLocation))
                 {
                     var updateInfo = await mgr.CheckForUpdate();
@@ -73,15 +74,17 @@ namespace Frankentime.WPF.ViewModel
                         restart = true;
                         var newVersion = updateInfo.FutureReleaseEntry.Version;
 
-                        UpdateStatus = $"Beginning to download version {newVersion}...";
+                        UpdateStatus = $"Downloading version {newVersion}...";
 
                         mgr.DownloadReleases(updateInfo.ReleasesToApply).Wait();
 
-                        UpdateStatus = "Beginning to apply release...";
+                        UpdateStatus = "Applying release...";
                         mgr.ApplyReleases(updateInfo).Wait();
 
                         UpdateStatus = "Creating uninstaller...";
                         mgr.CreateUninstallerRegistryEntry().Wait();
+                        mgr.CreateShortcutsForExecutable("Frankentime.WPF.exe", ShortcutLocation.Desktop, false);
+                        mgr.CreateShortcutsForExecutable("Frankentime.WPF.exe", ShortcutLocation.StartMenu, false);
                     }
                     UpdateStatus = "Done!";
                 }
