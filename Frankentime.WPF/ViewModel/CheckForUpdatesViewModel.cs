@@ -16,7 +16,7 @@ namespace Frankentime.WPF.ViewModel
         private string UpdateLocation = @"I:\Projects\FrankenTime\Releases";
 #else
         //private string UpdateLocation = "http://52.183.38.142/downloads";
-        private string UpdateLocation = "C:\Users\bosleybo\Dropbox\Workshare\Frankentime";
+        private string UpdateLocation = @"C:\Users\bosleybo\Dropbox\Workshare\Frankentime";
 #endif
 
         private string _updateStatus;
