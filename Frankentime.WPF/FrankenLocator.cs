@@ -50,7 +50,6 @@ namespace Frankentime.WPF
             SimpleIoc.Default.Register<IAnalytics, AnalyticsMultiplexor>();
             SimpleIoc.Default.Register<TimerViewModel>();
             SimpleIoc.Default.Register<CheckForUpdatesViewModel>();
-            SimpleIoc.Default.Register<MainViewModel>();
 
 
         }
@@ -58,7 +57,6 @@ namespace Frankentime.WPF
      
         public TimerViewModel TimerView => ServiceLocator.Current.GetInstance<TimerViewModel>();
         public CheckForUpdatesViewModel CheckForUpdates => ServiceLocator.Current.GetInstance<CheckForUpdatesViewModel>();
-        public MainViewModel MainView => ServiceLocator.Current.GetInstance<MainViewModel>();
 
         private void SetupNavigation()
         {

@@ -118,7 +118,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Behaviors\DropDownButtonBehavior.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="Views\CheckForUpdatesView.xaml.cs">
       <DependentUpon>CheckForUpdatesView.xaml</DependentUpon>
     </Compile>
@@ -126,12 +125,6 @@
     <Compile Include="FrameworkNavigationService.cs" />
     <Compile Include="ViewModel\TimerViewModel.cs" />
     <Compile Include="FrankenLocator.cs" />
-    <Compile Include="Views\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\TimerPage.xaml.cs">
-      <DependentUpon>TimerPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\ViewName.cs" />
     <Page Include="Views\CheckForUpdatesView.xaml">
       <SubType>Designer</SubType>
@@ -153,14 +146,6 @@
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\MainWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\TimerPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
